@@ -124,6 +124,9 @@ public class Canvas {
 	
 	public void fill(Point p, Character color){
 		Character oldColor = pixels.get(p);
+		if(oldColor != null){
+			pixels.remove(p);
+		}
 		p.setColor(color);
 		pixels.put(p, color);
 		fillColor(oldColor, color, p);
@@ -137,24 +140,28 @@ public class Canvas {
 		
 		if(pright.getX() <= width && pixels.get(pright) == oldColor){
 			pright.setColor(newColor);
+			pixels.remove(pright);
 			pixels.put(pright, newColor);
 			fillColor(oldColor, newColor, pright);
 		}
 		
 		if(pleft.getX() > 0 && pixels.get(pleft) == oldColor){
 			pleft.setColor(newColor);
+			pixels.remove(pleft);
 			pixels.put(pleft, newColor);
 			fillColor(oldColor, newColor, pleft);
 		}
 		
 		if(pup.getY() <= height && pixels.get(pup) == oldColor){
 			pup.setColor(newColor);
+			pixels.remove(pup);
 			pixels.put(pup, newColor);
 			fillColor(oldColor, newColor, pup);
 		}
 		
 		if(pdown.getY() > 0 && pixels.get(pdown) == oldColor){
 			pdown.setColor(newColor);
+			pixels.remove(pdown);
 			pixels.put(pdown, newColor);
 			fillColor(oldColor, newColor, pdown);
 		}

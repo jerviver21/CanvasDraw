@@ -37,6 +37,24 @@ public class Main {
 		System.out.println(" *********************** ");
 		canvas.paint();
 		
+		System.out.println(" *********************** ");
+		
+		Point p8 = new Point(16, 1);
+		canvas.fill(p8, 'm');
+		canvas.paint();
+		
+		System.out.println(" *********************** ");
+		
+		Point p9 = new Point(1, 3);
+		canvas.fill(p9, 'z');
+		canvas.paint();
+		
+		System.out.println(" *********************** ");
+		
+		Point p10 = new Point(1, 2);
+		canvas.fill(p10, 'u');
+		canvas.paint();
+		
 		
 
 	}
