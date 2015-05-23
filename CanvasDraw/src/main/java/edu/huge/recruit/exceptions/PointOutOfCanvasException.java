@@ -9,7 +9,7 @@ public class PointOutOfCanvasException extends Exception {
 	private static final long serialVersionUID = 1L;
 
 	public PointOutOfCanvasException(String message){
-		super(message);
+		super(message); 
 	}
 	
 	public PointOutOfCanvasException(){

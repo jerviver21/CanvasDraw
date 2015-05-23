@@ -19,7 +19,7 @@ public class Painter {
 		
 		for(Point p:pixels){
 			Integer y = p.getY();
-			Character[] row=rows.get(y);
+			Character[] row=rows.get(y); 
 			if(row==null){
 				row=new Character[width+2];
 				rows.put(y, row);
