@@ -10,6 +10,11 @@ public class Point {
 	private char color;
 	
 	
+	public Point(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
+	
 	public char getColor() {
 		return color;
 	}
@@ -27,6 +32,27 @@ public class Point {
 	}
 	public void setX(int x) {
 		this.x = x;
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		Point p = null;
+		if(o instanceof Point){
+			p = (Point) o;
+		}else{
+			return false;
+		}
+		
+		if(this.x == p.getX() && this.y==p.getY()){
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode(){
+		return (x+"_"+y).hashCode();
+		
 	}
 
 }
