@@ -29,7 +29,10 @@ public class Main {
 		
 		Point p5 = new Point(16, 1);
 		Point p6 = new Point(20, 3);
-		canvas.drawElement('L', p5, p6);
+		canvas.drawElement('R', p5, p6);
+		
+		Point p7 = new Point(10, 3);
+		canvas.fill(p7, 'o');
 		
 		System.out.println(" *********************** ");
 		canvas.paint();
