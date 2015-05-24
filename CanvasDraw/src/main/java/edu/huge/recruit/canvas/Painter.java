@@ -7,7 +7,7 @@ import java.util.TreeMap;
 import org.apache.log4j.Logger;
 
 /**
- * 
+ * This class paints the canvas
  * @author Jerson Viveros Aguirre - Huge Test Recruit
  */
 public class Painter {
@@ -15,6 +15,13 @@ public class Painter {
 	
 	Map<Integer, Character[]> rows;
 	
+	
+	/**
+	 * To paint the canvas it create array of characters that later will be Strings to print
+	 * @param pixels
+	 * @param width
+	 * @param height
+	 */
 	private void generateRows(Set<Point> pixels, int width, int height){
 		
 		for(Point p:pixels){
@@ -30,7 +37,11 @@ public class Painter {
 		}
 	}
 	
-	
+	/**
+	 * Order the margins of the canvas
+	 * @param width
+	 * @param height
+	 */
 	private void init(int width, int height){
 		rows = new TreeMap<Integer, Character[]>();
 		for(int i= 1; i <= height ; i++){
@@ -46,6 +57,13 @@ public class Painter {
 		rows.put(height+1, generateMargin(width, height));
 	}
 	
+	
+	/**
+	 * Generate the margins
+	 * @param width
+	 * @param height
+	 * @return
+	 */
 	private Character[] generateMargin(int width, int height){
 		Character [] margin = new Character[width+2];
 		for(int i=0; i<(width+2);i++){
@@ -54,6 +72,11 @@ public class Painter {
 		return margin;
 	}
 	
+	/**
+	 * Convert Character array in String to print
+	 * @param row
+	 * @return
+	 */
 	private String printRow(Character[] row){
 		StringBuilder sb=new StringBuilder();
 		for(Character c:row){
@@ -62,6 +85,12 @@ public class Painter {
 		return sb.toString();
 	}
 	
+	/**
+	 * Paint the canvas in the output.
+	 * @param pixels
+	 * @param w
+	 * @param h
+	 */
 	public void paint (Set<Point> pixels, int w, int h){
 
 		init(w, h);

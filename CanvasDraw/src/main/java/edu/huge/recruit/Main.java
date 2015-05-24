@@ -3,7 +3,6 @@ package edu.huge.recruit;
 import org.apache.log4j.Logger;
 
 import edu.huge.recruit.canvas.Canvas;
-import edu.huge.recruit.canvas.Point;
 import edu.huge.recruit.exceptions.InvalidCommandException;
 import edu.huge.recruit.exceptions.InvalidPointException;
 import edu.huge.recruit.exceptions.PointsMatchForLineException;
@@ -80,6 +79,9 @@ public class Main {
 
 	}
 	
+	/**
+	 * Main thread controller of the application, reads commands and call the objects.
+	 */
 	public void executeApp(){
 		CommandReader  cReader = new CommandReader();
 		boolean salir = false;
@@ -117,7 +119,10 @@ public class Main {
 					default:
 						break;
 				}
-				canvas.paint();
+				if(canvas != null){
+					canvas.paint();
+				}
+				
 			}catch(InvalidCommandException e){
 				System.out.println(e.getMessage());
 			}catch(InvalidPointException e){

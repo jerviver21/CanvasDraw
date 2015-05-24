@@ -3,8 +3,6 @@ package edu.huge.recruit.canvas;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 import edu.huge.recruit.exceptions.InvalidPointException;
 import edu.huge.recruit.exceptions.PointsMatchForLineException;
 import edu.huge.recruit.exceptions.PointsMatchForRectangleException;
@@ -39,7 +37,15 @@ public class Canvas {
 		
 	}
 	
-	
+	/**
+	 * Draws an element(line or rectangle) in the canvas
+	 * @param type
+	 * @param start
+	 * @param end
+	 * @throws PointsMatchForLineException
+	 * @throws PointsMatchForRectangleException
+	 * @throws InvalidPointException
+	 */
 	public void drawElement(char type, Point start, Point end)throws PointsMatchForLineException, PointsMatchForRectangleException, InvalidPointException{
 		CanvasValidator validator = new CanvasValidator(this);
 		switch (type) {
@@ -57,6 +63,13 @@ public class Canvas {
 	
 	}
 	
+	/**
+	 * Draws a line in the canvas
+	 * @param start
+	 * @param end
+	 * @throws PointsMatchForLineException
+	 * @throws InvalidPointException
+	 */
 	private void drawLine(Point start, Point end)throws PointsMatchForLineException, InvalidPointException{
 		int xIncrement = 0;
 		if(end.getX() != start.getX()){
@@ -90,6 +103,13 @@ public class Canvas {
 		}
 	}
 	
+	/**
+	 * Draws a rectangle in the canvas
+	 * @param start
+	 * @param end
+	 * @throws PointsMatchForRectangleException
+	 * @throws InvalidPointException
+	 */
 	private void drawRectangle(Point start, Point end)throws PointsMatchForRectangleException, InvalidPointException{
 		int xIncrement = 0;
 		if(end.getX() != start.getX()){
@@ -129,7 +149,12 @@ public class Canvas {
 		}
 	}
 	
-	
+	/**
+	 * Execute the bucket fill action in the canvas
+	 * @param p
+	 * @param color
+	 * @throws InvalidPointException
+	 */
 	public void fill(Point p, Character color)throws InvalidPointException{
 		CanvasValidator validator = new CanvasValidator(this);
 		validator.validatePoint(p);
@@ -143,6 +168,13 @@ public class Canvas {
 		fillColor(oldColor, color, p);
 	}
 	
+	/**
+	 * To execute the bucket fill action in the canvas, is needed a recursive method, this method 
+	 * call itself to check which positions must be painted with the new color.
+	 * @param oldColor
+	 * @param newColor
+	 * @param p
+	 */
 	private void fillColor(Character oldColor, Character newColor, Point p){
 		Point pright = new Point(p.getX()+1, p.getY());
 		Point pleft = new Point(p.getX()-1, p.getY());
@@ -180,6 +212,7 @@ public class Canvas {
 		
 	}
 
+	
 	public int getWidth() {
 		return width;
 	}

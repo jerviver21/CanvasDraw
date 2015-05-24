@@ -6,8 +6,19 @@ import java.io.InputStreamReader;
 import edu.huge.recruit.canvas.Point;
 import edu.huge.recruit.exceptions.InvalidCommandException;
 
+/**
+ * This class encapsulate the logic related with the read of commands from user and validation
+ * @author Jerson Viveros Aguirre - Huge Test Recruit
+ *
+ */
 public class CommandReader {
 
+	/**
+	 * Reads a command
+	 * @return
+	 * @throws InvalidCommandException
+	 * @throws Exception
+	 */
 	public Command readCommand()throws InvalidCommandException, Exception{
 		Command command=new Command();
 		

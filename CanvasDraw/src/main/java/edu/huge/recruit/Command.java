@@ -3,8 +3,15 @@ package edu.huge.recruit;
 import edu.huge.recruit.canvas.Point;
 import edu.huge.recruit.exceptions.InvalidCommandException;
 
+/**
+ * This class represents a command
+ * @author Jerson Viveros Aguirre - Huge Test Recruit
+ *
+ */
 public class Command {
-
+	/**
+	 * All attributes represent the differents inputs that the user can enter in the application
+	 */
 	private Character command;
 	private int width;
 	private int height;
@@ -42,7 +49,19 @@ public class Command {
 	public void setP2(Point p2) {
 		this.p2 = p2;
 	}
-	
+	public Character getColor() {
+		return color;
+	}
+	public void setColor(Character color) {
+		this.color = color;
+	}
+
+	/**
+	 * Validate that a command is valid and in accordance with the specification
+	 * @param commandData
+	 * @return
+	 * @throws InvalidCommandException
+	 */
 	public boolean validateCommand(String[] commandData)throws InvalidCommandException{
 		if(commandData.length < 1  || !commandData[0].matches("[CLRBQ]")){
 			throw new InvalidCommandException("Invalid Command, Enter C to create, L to draw a line, R to draw a Rectangule, B to paint an area or Q to Quit the application");
@@ -69,11 +88,4 @@ public class Command {
 		}
 		return true;
 	}
-	public Character getColor() {
-		return color;
-	}
-	public void setColor(Character color) {
-		this.color = color;
-	}
-
 }
