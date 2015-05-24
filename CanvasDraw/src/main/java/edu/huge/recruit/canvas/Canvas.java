@@ -24,7 +24,7 @@ public class Canvas {
 	public Canvas(int w, int h){
 		this.setWidth(w);
 		this.setHeight(h);
-		pixels = new HashMap<Point, Character>();
+		setPixels(new HashMap<Point, Character>());
 	}
 	
 	/**
@@ -33,7 +33,7 @@ public class Canvas {
 	public void paint(){
 		
 		Painter painter = new Painter();
-		painter.paint(pixels.keySet(), getWidth(), getHeight());
+		painter.paint(getPixels().keySet(), getWidth(), getHeight());
 		
 	}
 	
@@ -83,15 +83,15 @@ public class Canvas {
 		start.setColor('x');
 		end.setColor('x');
 		
-		pixels.put(start, 'x');
-		pixels.put(end, 'x');
+		getPixels().put(start, 'x');
+		getPixels().put(end, 'x');
 		
 		int coordX = start.getX();
 		while(coordX != end.getX()){
 			coordX += xIncrement;
 			Point p = new Point(coordX, start.getY());
 			p.setColor('x');
-			pixels.put(p, 'x');
+			getPixels().put(p, 'x');
 		}
 		
 		int coordY = start.getY();
@@ -99,7 +99,7 @@ public class Canvas {
 			coordY += yIncrement;
 			Point p = new Point(end.getX(), coordY);
 			p.setColor('x');
-			pixels.put(p, 'x');
+			getPixels().put(p, 'x');
 		}
 	}
 	
@@ -123,18 +123,18 @@ public class Canvas {
 		start.setColor('x');
 		end.setColor('x');
 		
-		pixels.put(start, 'x');
-		pixels.put(end, 'x');
+		getPixels().put(start, 'x');
+		getPixels().put(end, 'x');
 		
 		int coordX = start.getX();
 		while(coordX != end.getX()){
 			coordX += xIncrement;
 			Point p1 = new Point(coordX, start.getY());
 			p1.setColor('x');
-			pixels.put(p1, 'x');
+			getPixels().put(p1, 'x');
 			Point p2 = new Point(coordX, end.getY());
 			p2.setColor('x');
-			pixels.put(p2, 'x');
+			getPixels().put(p2, 'x');
 		}
 		
 		int coordY = start.getY();
@@ -142,10 +142,10 @@ public class Canvas {
 			coordY += yIncrement;
 			Point p1 = new Point(start.getX(), coordY);
 			p1.setColor('x');
-			pixels.put(p1, 'x');
+			getPixels().put(p1, 'x');
 			Point p2 = new Point(end.getX(), coordY);
 			p2.setColor('x');
-			pixels.put(p2, 'x');
+			getPixels().put(p2, 'x');
 		}
 	}
 	
@@ -159,12 +159,12 @@ public class Canvas {
 		CanvasValidator validator = new CanvasValidator(this);
 		validator.validatePoint(p);
 		
-		Character oldColor = pixels.get(p);
+		Character oldColor = getPixels().get(p);
 		if(oldColor != null){
-			pixels.remove(p);
+			getPixels().remove(p);
 		}
 		p.setColor(color);
-		pixels.put(p, color);
+		getPixels().put(p, color);
 		fillColor(oldColor, color, p);
 	}
 	
@@ -181,31 +181,31 @@ public class Canvas {
 		Point pup = new Point(p.getX(), p.getY()+1);
 		Point pdown = new Point(p.getX(), p.getY()-1);
 		
-		if(pright.getX() <= getWidth() && pixels.get(pright) == oldColor){
+		if(pright.getX() <= getWidth() && getPixels().get(pright) == oldColor){
 			pright.setColor(newColor);
-			pixels.remove(pright);
-			pixels.put(pright, newColor);
+			getPixels().remove(pright);
+			getPixels().put(pright, newColor);
 			fillColor(oldColor, newColor, pright);
 		}
 		
-		if(pleft.getX() > 0 && pixels.get(pleft) == oldColor){
+		if(pleft.getX() > 0 && getPixels().get(pleft) == oldColor){
 			pleft.setColor(newColor);
-			pixels.remove(pleft);
-			pixels.put(pleft, newColor);
+			getPixels().remove(pleft);
+			getPixels().put(pleft, newColor);
 			fillColor(oldColor, newColor, pleft);
 		}
 		
-		if(pup.getY() <= getHeight() && pixels.get(pup) == oldColor){
+		if(pup.getY() <= getHeight() && getPixels().get(pup) == oldColor){
 			pup.setColor(newColor);
-			pixels.remove(pup);
-			pixels.put(pup, newColor);
+			getPixels().remove(pup);
+			getPixels().put(pup, newColor);
 			fillColor(oldColor, newColor, pup);
 		}
 		
-		if(pdown.getY() > 0 && pixels.get(pdown) == oldColor){
+		if(pdown.getY() > 0 && getPixels().get(pdown) == oldColor){
 			pdown.setColor(newColor);
-			pixels.remove(pdown);
-			pixels.put(pdown, newColor);
+			getPixels().remove(pdown);
+			getPixels().put(pdown, newColor);
 			fillColor(oldColor, newColor, pdown);
 		}
 		
@@ -227,6 +227,14 @@ public class Canvas {
 
 	public void setHeight(int height) {
 		this.height = height;
+	}
+
+	public Map<Point, Character> getPixels() {
+		return pixels;
+	}
+
+	public void setPixels(Map<Point, Character> pixels) {
+		this.pixels = pixels;
 	}
 
 

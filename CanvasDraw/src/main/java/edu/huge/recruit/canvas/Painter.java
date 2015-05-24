@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 public class Painter {
 	private Logger logger = Logger.getLogger(Painter.class);
 	
-	Map<Integer, Character[]> rows;
+	private Map<Integer, Character[]> rows;
 	
 	
 	/**
@@ -26,10 +26,10 @@ public class Painter {
 		
 		for(Point p:pixels){
 			Integer y = p.getY();
-			Character[] row=rows.get(y); 
+			Character[] row=getRows().get(y); 
 			if(row==null){
 				row=new Character[width+2];
-				rows.put(y, row);
+				getRows().put(y, row);
 				row[0] = '|';
 				row[width+1] = '|';
 			}
@@ -43,18 +43,18 @@ public class Painter {
 	 * @param height
 	 */
 	private void init(int width, int height){
-		rows = new TreeMap<Integer, Character[]>();
+		setRows(new TreeMap<Integer, Character[]>());
 		for(int i= 1; i <= height ; i++){
 			Character[]  row=new Character[width+2];
-			rows.put(i, row);
+			getRows().put(i, row);
 			row[0] = '|';
 			row[width+1] = '|';
 			for(int j=1;j<=width;j++ ){
 				row[j] = ' ';
 			}
 		}
-		rows.put(0, generateMargin(width, height));
-		rows.put(height+1, generateMargin(width, height));
+		getRows().put(0, generateMargin(width, height));
+		getRows().put(height+1, generateMargin(width, height));
 	}
 	
 	
@@ -77,7 +77,7 @@ public class Painter {
 	 * @param row
 	 * @return
 	 */
-	private String printRow(Character[] row){
+	public String printRow(Character[] row){
 		StringBuilder sb=new StringBuilder();
 		for(Character c:row){
 			sb.append(c);
@@ -96,12 +96,20 @@ public class Painter {
 		init(w, h);
 		generateRows(pixels, w, h);
 		
-		Set<Integer> lrows = rows.keySet();
+		Set<Integer> lrows = getRows().keySet();
 		for(Integer kr : lrows){
-			System.out.println(printRow(rows.get(kr)));
+			System.out.println(printRow(getRows().get(kr)));
 		}
 		
 		
+	}
+
+	public Map<Integer, Character[]> getRows() {
+		return rows;
+	}
+
+	public void setRows(Map<Integer, Character[]> rows) {
+		this.rows = rows;
 	}
 
 	

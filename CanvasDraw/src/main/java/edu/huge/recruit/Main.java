@@ -34,55 +34,16 @@ public class Main {
 		m.executeApp();
 		
 
-		
-		
-		/*Canvas canvas = new Canvas(20, 4);
-		canvas.paint();
-		
-		Point p1 = new Point(1, 2);
-		Point p2 = new Point(6, 2);
-		canvas.drawElement('L', p1, p2);
-		
-		Point p3 = new Point(6, 3);
-		Point p4 = new Point(6, 4);
-		canvas.drawElement('L', p3, p4);
-		
-		Point p5 = new Point(16, 1);
-		Point p6 = new Point(20, 3);
-		canvas.drawElement('R', p5, p6);
-		
-		Point p7 = new Point(10, 3);
-		canvas.fill(p7, 'o');
-		
-		System.out.println(" *********************** ");
-		canvas.paint();
-		
-		System.out.println(" *********************** ");
-		
-		Point p8 = new Point(16, 1);
-		canvas.fill(p8, 'm');
-		canvas.paint();
-		
-		System.out.println(" *********************** ");
-		
-		Point p9 = new Point(1, 3);
-		canvas.fill(p9, 'z');
-		canvas.paint();
-		
-		System.out.println(" *********************** ");
-		
-		Point p10 = new Point(1, 2);
-		canvas.fill(p10, 'u');
-		canvas.paint();*/
-		
-		
-
 	}
 	
 	/**
 	 * Main thread controller of the application, reads commands and call the objects.
 	 */
 	public void executeApp(){
+		System.out.println("");
+		System.out.println("");
+		System.out.println("Welcome to the Drawer App. A product from  Huge Inc.");
+		
 		CommandReader  cReader = new CommandReader();
 		boolean salir = false;
 		while(!salir){
