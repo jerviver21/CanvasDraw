@@ -5,12 +5,16 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import edu.huge.recruit.exceptions.InvalidPointException;
+import edu.huge.recruit.exceptions.PointsMatchForLineException;
+import edu.huge.recruit.exceptions.PointsMatchForRectangleException;
+
 /**
  * This class represent the canvas itself
  * @author Jerson Viveros Aguirre - Huge Test Recruit
  */
 public class Canvas {
-	private Logger logger = Logger.getLogger(Canvas.class);
+	
 	private int width;
 	private int height;
 	/**
@@ -18,9 +22,10 @@ public class Canvas {
 	 */
 	private Map<Point, Character> pixels;
 	
+	
 	public Canvas(int w, int h){
-		this.width=w;
-		this.height=h;
+		this.setWidth(w);
+		this.setHeight(h);
 		pixels = new HashMap<Point, Character>();
 	}
 	
@@ -30,17 +35,20 @@ public class Canvas {
 	public void paint(){
 		
 		Painter painter = new Painter();
-		painter.paint(pixels.keySet(), width, height);
+		painter.paint(pixels.keySet(), getWidth(), getHeight());
 		
 	}
 	
 	
-	public void drawElement(char type, Point start, Point end){
+	public void drawElement(char type, Point start, Point end)throws PointsMatchForLineException, PointsMatchForRectangleException, InvalidPointException{
+		CanvasValidator validator = new CanvasValidator(this);
 		switch (type) {
 			case 'L':
+				validator.validatePointsForLine(start, end);
 				drawLine(start, end);
 				break;
 			case 'R':
+				validator.validatePointsForRectangle(start, end);
 				drawRectangle(start, end);
 				break;	
 			default:
@@ -49,7 +57,7 @@ public class Canvas {
 	
 	}
 	
-	public void drawLine(Point start, Point end){
+	private void drawLine(Point start, Point end)throws PointsMatchForLineException, InvalidPointException{
 		int xIncrement = 0;
 		if(end.getX() != start.getX()){
 			xIncrement = (end.getX() - start.getX())/Math.abs(end.getX() - start.getX());
@@ -82,7 +90,7 @@ public class Canvas {
 		}
 	}
 	
-	public void drawRectangle(Point start, Point end){
+	private void drawRectangle(Point start, Point end)throws PointsMatchForRectangleException, InvalidPointException{
 		int xIncrement = 0;
 		if(end.getX() != start.getX()){
 			xIncrement = (end.getX() - start.getX())/Math.abs(end.getX() - start.getX());
@@ -122,7 +130,10 @@ public class Canvas {
 	}
 	
 	
-	public void fill(Point p, Character color){
+	public void fill(Point p, Character color)throws InvalidPointException{
+		CanvasValidator validator = new CanvasValidator(this);
+		validator.validatePoint(p);
+		
 		Character oldColor = pixels.get(p);
 		if(oldColor != null){
 			pixels.remove(p);
@@ -132,13 +143,13 @@ public class Canvas {
 		fillColor(oldColor, color, p);
 	}
 	
-	public void fillColor(Character oldColor, Character newColor, Point p){
+	private void fillColor(Character oldColor, Character newColor, Point p){
 		Point pright = new Point(p.getX()+1, p.getY());
 		Point pleft = new Point(p.getX()-1, p.getY());
 		Point pup = new Point(p.getX(), p.getY()+1);
 		Point pdown = new Point(p.getX(), p.getY()-1);
 		
-		if(pright.getX() <= width && pixels.get(pright) == oldColor){
+		if(pright.getX() <= getWidth() && pixels.get(pright) == oldColor){
 			pright.setColor(newColor);
 			pixels.remove(pright);
 			pixels.put(pright, newColor);
@@ -152,7 +163,7 @@ public class Canvas {
 			fillColor(oldColor, newColor, pleft);
 		}
 		
-		if(pup.getY() <= height && pixels.get(pup) == oldColor){
+		if(pup.getY() <= getHeight() && pixels.get(pup) == oldColor){
 			pup.setColor(newColor);
 			pixels.remove(pup);
 			pixels.put(pup, newColor);
@@ -168,5 +179,22 @@ public class Canvas {
 		
 		
 	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
 
 }
